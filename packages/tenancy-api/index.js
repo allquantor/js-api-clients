@@ -164,8 +164,8 @@ class WebhooksEndpoint {
     this.client = client;
   }
 
-  async create(url, headers, version, status, events) {
-    const data = { url, headers, version, status, events };
+  async create(url, headers, version, status, eventFilters, hmacSecretKey) {
+    const data = { url, headers, version, status, event_filters:eventFilters, hmac_secret_key:hmacSecretKey };
     const response = await this.client.post('tenancy/webhooks/', data);
     return response.data;
   }
@@ -218,8 +218,8 @@ class WebhooksEndpoint {
     return response.data;
   }
 
-  async update(id, url, headers, version, status, events) {
-    const data = { url, headers, version, status, events };
+  async update(id, url, headers, version, status, eventFilters, hmacSecretKey) {
+    const data = { url, headers, version, status, event_filters:eventFilters, hmac_secret_key:hmacSecretKey };
     const response = await this.client.patch(`tenancy/webhooks/${id}`, data);
     return response.status == 200;
   }

@@ -31,16 +31,24 @@ class UpvestTenancyAPI {
     );
   }
 
-  async echo(what) {
-    const data = {echo: what};
-    const response = await this.client.post('tenancy/echo-signed', data);
-    return response.data.echo;
+  async time(requestId) {
+    const response = await this.client.get('time/', {requestId});
+    // return response.data;
+    return response;
   }
 
-  async echoGet(what) {
+  async echo(what, requestId) {
     const data = {echo: what};
-    const response = await this.client.get('tenancy/echo-signed', {params:data});
-    return response.data.echo;
+    const response = await this.client.post('tenancy/echo-signed', data, {requestId});
+    // return response.data.echo;
+    return response;
+  }
+
+  async echoGet(what, requestId) {
+    const data = {echo: what};
+    const response = await this.client.get('tenancy/echo-signed', {params:data, requestId});
+    // return response.data.echo;
+    return response;
   }
 
   get users() {
